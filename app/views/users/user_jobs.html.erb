@@ -1,0 +1,9 @@
+<div class="container">
+  <h1 class="title-header">Your Posted Jobs</h1>
+  <hr>
+
+  <% @user_jobs.each do |user_job| %>
+    <%= link_to user_job.title.titleize, job_path(user_job), class: "job-title" %>
+    <hr>
+  <% end %>
+<div class="container">

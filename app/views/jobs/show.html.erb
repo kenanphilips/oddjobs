@@ -1,0 +1,98 @@
+<div class="container">
+  <div class="col-md-8">
+    <h1 class="title-header" id="jobTitle"><%= @job.title.titleize %></h1>
+    <% if user_signed_in? && current_user.student? == true %>
+      <div id="applyButton" style="display: inline-block;">
+        <%= render "/applies/apply", job: @job %>
+      </div>
+    <% end %>
+    <hr>
+      <p><%= @job.description.capitalize %></p>
+      <hr>
+      <h4><strong>Requirements: </strong></h4><p><%= @job.requirements.capitalize %></p>
+      <% if @job.end_date == nil %>
+        <h4><strong>When? </strong></h4><h5><%= @job.start_date.to_time.strftime('%A, %B %e, %Y') %></h5>
+      <% elsif @job.start_date != nil && @job.end_date != nil %>
+        <h4><strong>When? </strong></h4><%= @job.start_date.to_time.strftime('%A, %B %e, %Y') %> to <%= @job.end_date.to_time.strftime('%A, %B %e, %Y') %></h5>
+      <% end %>
+      <h4><strong>Location: </strong></h4><h5><%= @job.address %></h5>
+      <h4><strong>Compensation: </strong></h4><h5>$<%= @job.wage %>/hr</h5>
+
+
+
+      <% if user_signed_in? && current_user.id == @job.user_id %>
+        <%= link_to "Edit", edit_job_path(@job)%>
+        <%= link_to "Delete", job_path(@job),
+                              method: :delete,
+                              data: {confirm: "Are you sure?"}  %>
+      <% end %>
+      <hr>
+
+    <% if user_signed_in? && current_user.id == @job.user_id %>
+      <div id="appliedUsers">
+        <table id="tableInfo">
+          <% if @users.present? %>
+            <th class="text-center">Applicant</th>
+            <th class="text-center">Email</th>
+            <th class="text-center">Phone Number</th>
+          <% end %>
+          <% @users.each do |user| %>
+            <tr>
+              <td><%= link_to user.full_name, profile_path(Profile.find_by_user_id(user.id)) %></td>
+              <td><%= mail_to user.email %></td>
+              <td><%= get_phone_number(user) %></td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="col-md-4">
+    <div class="google-map">
+      <div id="map" style='width: 350px; height: 400px;'></div>
+    </div>
+    <form action="http://maps.google.com/maps" method="get" target="_blank">
+       <input class="form-control" style="width: 350px; margin-top: 20px; margin-bottom: 10px;" type="text" name="saddr" placeholder="Input Your Current Location" />
+       <input type="hidden" name="daddr" value="<%= @job.address %>" />
+       <input class="btn btn-default" style="width: 350px;" type="submit" value="Get Directions" />
+    </form>
+  </div>
+
+</div>
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel"><%= image_tag("oddjobs-logo.png", :alt => "oddjobs logo", :style => "width: 100px;") %></h4>
+        </div>
+        <div class="modal-body">
+          Thank you for applying! The post owner should get back to you shortly.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Modal -->
+
+  <script>
+    handler = Gmaps.build('Google');
+    handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+      markers = handler.addMarkers([
+        {
+          "lat": <%= @job.latitude %>,
+          "lng": <%= @job.longitude %>,
+          "infowindow": "<%= @job.title.titleize %> - <%= @job.address %>"
+        }
+      ]);
+      handler.bounds.extendWith(markers);
+      handler.fitMapToBounds();
+      handler.getMap().setZoom(16);
+    });
+  </script>

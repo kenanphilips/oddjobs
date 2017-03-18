@@ -1,0 +1,8 @@
+<% if @job.applied_by?(current_user) %>
+  <%= button_to "Applied",
+              job_apply_path(@job, @job.apply_for(current_user)),
+              method: :delete, remote: true, class: "apply btn btn-default" %>
+<% else %>
+  <%= button_to "Apply", job_applies_path(@job), method: :post, remote: true, class: "apply btn btn-default", data: { toggle: "modal", target: "#myModal" } %>
+
+<% end %>

@@ -1,0 +1,11 @@
+<%= simple_form_for @job do |f| %>
+  <%= f.collection_select :category_id, Category.all, :id, :name, {prompt: "Choose A Category"}, {class: "form-control"} %><br>
+  <%= f.input :title %>
+  <%= f.input :description, as: :text %>
+  <%= f.input :requirements, as: :text %>
+  <%= f.input :start_date, label: "Starting Date", as: :date %>
+  <%= f.input :end_date, as: :date, include_blank: true, default: nil, label: "Ending Date", hint: ("Only add an ending date if your job will take place longer than one day.") %>
+  <%= f.input :address, hint: ("Please make sure you add your 'City', 'Province' and 'Postal Code' along with your address number.") %>
+  <%= f.input :wage, as: :integer, hint: ("Per hour.") %>
+  <%= f.button :submit %>
+<% end %>

@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="profile-image col-md-3">
+    <%= image_tag @profile.image_url(:medium) if @profile.image? %>
+    <button  id="contactInfoButton" type="button" class="btn btn-default" data-toggle="modal" data-target="#contactModal">Contact Info</button>
+
+    <div class="modal fade" id="contactModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title"><%= image_tag("oddjobs-logo.png", :alt => "oddjobs logo", :style => "width: 100px;") %></h4>
+          </div>
+          <div class="modal-body">
+            <h4 id="contactInfo">Contact Info</h4>
+            <p><strong>Name: </strong><%= @user.full_name %></p>
+            <p><strong>Phone Number: </strong><%= @profile.phone_number %></p>
+            <p><strong>Email: </strong><%= mail_to @user.email %></p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+  </div>
+
+  <div class="row col-md-9" id="profileInfo">
+    <h1 class="title-header"><%= @user.full_name %>, <%= @profile.age %></h1>
+
+    <h3><%= @profile.city %></h3>
+
+    <% if @profile.school? %>
+      <h5>Currently attending <%= @profile.school %></h5>
+    <% end %><br>
+
+    <h4>About <%= @user.first_name %></h4>
+    <p><%= @profile.description %></p><br>
+
+    <% if @profile.experience? %>
+      <h4>Work Experience</h4>
+      <p><%= @profile.experience %></p>
+    <% end %>
+  </div>
+</div>

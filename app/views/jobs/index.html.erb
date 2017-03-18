@@ -1,0 +1,37 @@
+<div class="container">
+
+  <%= form_tag(jobs_path, :method => "get", id: "search-form") do %>
+    <%= text_field_tag :search, params[:search], placeholder: "Search jobs", class: "form-control col-md-3", id: "searchBar" %>
+    <%= submit_tag "Search", class: "btn btn-default search-submit" %>
+  <% end %>
+
+  <div class="btn-group" id="categoryDropdown">
+    <button type="button" class="btn btn-default dropdown-toggle", data-toggle="dropdown", aria-haspopup="true", aria-expanded="false">Categories <span class="caret"></span></button>
+    <ul class="dropdown-menu">
+      <li><%= link_to "All Categories",jobs_path %></li>
+      <% Category.all.each do |category| %>
+        <li><%= link_to category.name, jobs_path(category: category.name) %></li>
+      <% end %>
+    </ul>
+  </div>
+  <% if current_user && current_user.student? == false %>
+    <%= link_to "Add a Job", new_job_path, class: "btn btn-default", id: "indexAddJob" %>
+  <% end %>
+  <br><br><hr>
+  <!-- <div class="text-center">
+    <%#= page_entries_info(@jobs) %>
+  </div> -->
+
+  <% @jobs.each do |job| %>
+  <div>
+    <%= link_to job.title.titleize, job_path(job), class: "job-title" %><br>
+    $<%= job.wage %>/hr<br>
+    <%= truncate(job.description.capitalize, length: 300) %>
+    <hr>
+  </div>
+  <% end %>
+
+  <div class="text-center">
+    <%#r= paginate @jobs %><br>
+  </div>
+</div>

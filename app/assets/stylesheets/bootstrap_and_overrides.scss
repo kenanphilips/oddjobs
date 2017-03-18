@@ -1,0 +1,221 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+/* ---- COLOUR PALETTE ---- */
+$salmon: #FF6A5C;
+$charcoal: #414141;
+$white: #FFFFFF;
+$darkTeal: #056571;
+
+/* ---- NAVBAR ---- */
+.navbar {
+  margin-bottom: 0px;
+  height: 80px;
+}
+
+.navbar-default {
+  background-color: $charcoal;
+  border: 0;
+  border-radius: 0px;
+}
+
+.navbar-default .navbar-brand:hover, .navbar-default .navbar-brand {
+  font-family: "EdmondsansBold", sans-serif;
+  font-weight: bold;
+  color: $white;
+  position: absolute;
+  left: 52%;
+  margin-left: -100px !important;
+  display: block;
+  font-size: 30px;
+  margin-top: 15px;
+}
+
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a.active {
+  color: $salmon;
+}
+
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+  background-color: transparent;
+  color: $salmon;
+}
+
+.navbar-default .navbar-nav > li > a:focus {
+  color: $white;
+}
+
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:focus, .navbar-default .navbar-nav > .active > a:hover {
+  background-color: transparent;
+}
+
+.navbar-default .navbar-nav > li > a {
+  font-family: "Raleway", sans-serif;
+  font-weight: bold;
+  color: $white;
+  text-transform: uppercase;
+  margin-top: 15px;
+  -moz-transition: all .1s ease-in;
+  -webkit-transition: all .1s ease-in;
+  transition: all .1s ease-in;
+  letter-spacing: 2px;
+}
+
+/* ---- BODY CONTENT ---- */
+* {
+  font-family: "Raleway", sans-serif;
+}
+
+body {
+  padding-top: 80px;
+}
+
+body > .container {
+  padding-top: 40px;
+  padding-bottom: 50px;
+}
+
+a {
+  color: $darkTeal;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #FF6A5C;
+}
+
+.title-header {
+  font-family: "Raleway", sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.btn {
+  border: 0px;
+  background-color: $salmon;
+  color: $white;
+  -moz-transition: all .1s ease-in;
+  -webkit-transition: all .1s ease-in;
+  transition: all .1s ease-in;
+}
+
+.btn:focus {
+  background-color: $salmon;
+  color: $white;
+}
+
+.alert {
+  margin: 0px;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* home page */
+#hero {
+  background-image: image-url('work2.jpg');
+  width: 100%;
+  top:0;
+  left:0;
+  z-index: 0;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -ms-background-size: cover;
+  background-size: cover;
+  position: relative;
+}
+
+div .hero-content {
+  margin-top: 100px;
+}
+
+#titleLogo p {
+  font-family: "EdmondsansBold", sans-serif;
+  font-weight: bold;
+  font-size: 200px;
+  color: $white;
+  text-align: center;
+}
+
+#phrase p {
+  font-family: "Raleway", sans-serif;
+  letter-spacing: 1px;
+  font-size: 50px;
+  color: $white;
+  text-align: center;
+}
+
+/* student profiles */
+.profile-image {
+  padding-top: 27px;
+}
+
+#contactInfoButton {
+  width: 200px;
+  margin-top: 50px;
+}
+
+/* job pages */
+.google-map {
+  padding-top: 50px;
+}
+
+.job-title {
+  font-size: 20px;
+  font-weight: bold;
+  font-family: "Raleway", sans-serif;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: $darkTeal;
+}
+
+.job-wage {
+  font-size: 10px;
+}
+
+#appliedUsers {
+  margin-top: 50px;
+}
+
+#applyButton .btn {
+  width: 100px;
+  padding: 10px;
+  margin-left: 25px;
+  margin-bottom: 18px;
+}
+
+input[value="Applied"] {
+  background-color: #E6E6E6;
+  color: #414141;
+}
+
+#jobTitle {
+  display: inline-block;
+}
+
+#searchBar {
+  border-radius: 5px;
+  width: 300px;
+}
+
+/* job index page */
+#categoryDropdown {
+  margin-left: 2px;
+    .dropdown-toggle {
+      width: 150px;
+    }
+}
+
+#indexAddJob {
+  float: right;
+  width: 250px;
+}
+
+#search-form {
+  display: inline;
+}
+
+.search-submit {
+  margin-left: 5px;
+}
